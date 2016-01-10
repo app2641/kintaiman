@@ -2,7 +2,9 @@ QUnit.test('Runner', function (assert) {
   var settings = {
     get: function () {
       return 'spreadsheet_id';
-    }
+    },
+
+    set: function () {}
   };
 
   var templates = {
@@ -57,4 +59,6 @@ QUnit.test('Runner', function (assert) {
   msgTest('user1', 'おつ 8:21', ['@user1 1/2 8:21 退勤']);
   msgTest('user1', 'おわり 6/14 pm3:00', ['@user1 6/14 15:00 退勤']);
   msgTest('user1', '帰ります 午後8時', ['@user1 1/2 20:00 退勤']);
+
+  msgTest('user1', '12月はこれ https://docs.google.com/spreadsheets/d/1Iz7dh8OqseD3SaxhSHW_ZWIK_vRwNq5I--osPSnFTEM/edit#gid=1245018676', ['@user1 12月の業務日報を登録']);
 });

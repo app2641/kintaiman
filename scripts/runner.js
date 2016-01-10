@@ -31,7 +31,7 @@ loadRunner = function (exports) {
     });
 
     if (command && this[command[0]]) {
-      return this[command[0]](username);
+      return this[command[0]](username, message);
     }
   };
 
@@ -63,9 +63,16 @@ loadRunner = function (exports) {
   };
 
   Runner.prototype.add_timesheet = function (username, message) {
-    var matches = message.match(/[0-9]+月/);
-    if (! matches) return;
-    console.log(matches);
+    var month_matches = message.match(/[0-9]+月/);
+    var id_matches = message.match(/https:\/\/docs\.google\.com\/spreadsheets\/d\/([^\/]*)/);
+    if (month_matches === null || id_matches === null) return;
+
+    var month = month_matches[0];
+    var ss_id = id_matches[1];
+    this.settings.set('TimeSheets', month, ss_id);
+
+    var message = '@'+username+' '+month+'の業務日報を登録';
+    this.slack.send(message);
   };
 
   return Runner;
