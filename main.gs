@@ -1,4 +1,4 @@
-/* Yamamoto-san https://github.com/app2641/yamamoto/ */
+/* KintaiMan https://github.com/app2641/kintaiman/ */
 /* (c) app2641 2016- License: MIT */
 /* ------------------- */
 /**

@@ -1,7 +1,6 @@
 {
-  "name": "yamamoto",
+  "name": "kintaiman",
   "version": "1.0.0",
-  "description": "",
   "dependencies": {
     "gas-manager": "^0.4.3",
     "qunit": "^0.7.7"
