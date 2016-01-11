@@ -23,7 +23,8 @@ loadRunner = function (exports) {
     var commands = [
       ['attendance', /(おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning)/],
       ['leave', /(おつ|乙|お疲|お先|帰|退勤|さようなら|終わり|おわり|bye|グッバイ)/],
-      ['add_timesheet', /[0-9]+月はこれ/]
+      ['add_timesheet', /[0-9]+月はこれ/],
+      ['get_timesheet', /[0-9]+月の日報/]
     ];
 
     var command = _.find(commands, function (cmd) {
@@ -72,6 +73,17 @@ loadRunner = function (exports) {
     this.settings.set('TimeSheets', month, ss_id);
 
     var message = '@'+username+' '+month+'の業務日報を登録';
+    this.slack.send(message);
+  };
+
+  Runner.prototype.get_timesheet = function (username, message) {
+    var month_matches = message.match(/[0-9]+月/);
+    if (! month_matches) return;
+
+    var month = month_matches[0];
+    var ss_id = this.settings.get('TimeSheets', month);
+
+    var message = '@'+username+' https://docs.google.com/spreadsheets/d/'+ss_id+'/edit';
     this.slack.send(message);
   };
 
