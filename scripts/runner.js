@@ -22,7 +22,7 @@ loadRunner = function (exports) {
 
     var commands = [
       ['attendance', /(おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning)/],
-      ['leave', /(おつ|乙|お疲|お先|帰|退勤|さようなら|終わり|おわり|bye|グッバイ)/],
+      ['leave', /(おつ|乙|お疲|お先|帰|退勤|さようなら|終わり|終わる|おわり|おわる|bye|グッバイ)/],
       ['add_timesheet', /[0-9]+月はこれ/],
       ['get_timesheet', /[0-9]+月の日報/]
     ];
