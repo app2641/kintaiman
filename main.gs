@@ -342,7 +342,7 @@ loadSettings = function (exports) {
           break;
         case 'TimeSheets':
           if (typeof this.time_sheet === 'undefined') {
-            this.time_sheet = spreadsheet.getSheetByName('Timesheets');
+            this.time_sheet = spreadsheet.getSheetByName('TimeSheets');
           }
           return this.time_sheet;
           break;
