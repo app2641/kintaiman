@@ -26,4 +26,11 @@ runner.run([{
   code: "./scripts/event_listener.js",
   tests: "./tests/event_listener_test.js",
   deps: "./scripts/underscorejs.js"
+}, {
+  code: "./scripts/slack.js",
+  tests: "./tests/slack_test.js",
+  deps: [
+    "./scripts/underscorejs.js",
+    "./scripts/event_listener.js"
+  ]
 }]);

@@ -15,15 +15,15 @@ loadSlack = function () {
   _.extend(Slack.prototype, EventListener.prototype);
 
   Slack.prototype.receiveMessage = function (message) {
-    var username = String(message.user_name);
+    var username = String(message['user_name']);
     var body = String(message['text']);
 
-    // -で始まるメッセージも無視
-    if(body.match(/^-/)) return;
+    // #で始まるメッセージは無視
+    if (body.match(/^(#|♯)/)) return;
 
     var user = this.settings.get('Users', username);
     if (user) {
-      this.fireEvent('receiveMessage', username.toLowerCase(), body);
+      this.fireEvent('receiveMessage', username, body);
     }
   };
 
