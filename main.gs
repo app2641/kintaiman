@@ -1,4 +1,5 @@
-/* KintaiMan https://github.com/app2641/kintaiman/ */
+/* KintaiMan https://github.com/app2641/kintaiman */
+/* Version 0.2.0 */
 /* (c) app2641 2016- License: MIT */
 /* ------------------- */
 /**
@@ -65,11 +66,6 @@ loadDateUtils = function () {
       min = (String(min).length == 1) ? '0' + min : min;
       return hour + ':' + min;
     }
-
-    var hour = now().getHours();
-    var min = now().getMinutes();
-    min = (String(min).length == 1) ? '0' + min : min;
-    return hour + ':' + min;
   };
 
   DateUtils.parseDate = function (str) {
@@ -99,10 +95,21 @@ loadDateUtils = function () {
 
       return [month, day];
     }
+  };
 
+  DateUtils.today = function (message) {
     var month = now().getMonth() + 1;
     var day = now().getDate();
+
     return [month, day];
+  };
+
+  DateUtils.nowtime = function (message) {
+    var hour = now().getHours();
+    var min = now().getMinutes();
+    min = (String(min).length == 1) ? '0' + min : min;
+
+    return hour + ':' + min;
   };
 
   return DateUtils;
@@ -261,8 +268,9 @@ loadRunner = function (exports) {
     this.time = DateUtils.parseTime(message);
 
     var commands = [
-      ['attendance', /(おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning)/],
-      ['leave', /(おつ|乙|お疲|お先|帰|退勤|さようなら|終わり|終わる|おわり|おわる|bye|グッバイ)/],
+      ['attendance', /(おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning|出社|モーニン|:sunny:)/],
+      ['leave', /(おつ|乙|お疲|お先|帰|退勤|さようなら|終わり|終わる|おわり|おわる|bye|失礼します|グッバイ|退社|:frog:|:beer:|:beers:)/],
+      ['breaktime', /(昼食|ランチ|休憩|:bento:)/],
       ['add_timesheet', /[0-9]+月はこれ/],
       ['get_timesheet', /[0-9]+月の日報/]
     ];
@@ -277,6 +285,8 @@ loadRunner = function (exports) {
   };
 
   Runner.prototype.attendance = function (username, message) {
+    if (! this.date) this.date = DateUtils.today();
+    if (! this.time) this.time = DateUtils.nowtime();
     if (this.date == undefined || this.time == undefined) return;
 
     var spreadsheet_id = this.settings.get('TimeSheets', this.date[0]+'月');
@@ -291,6 +301,8 @@ loadRunner = function (exports) {
   };
 
   Runner.prototype.leave = function (username, message) {
+    if (! this.date) this.date = DateUtils.today();
+    if (! this.time) this.time = DateUtils.nowtime();
     if (this.date == undefined || this.time == undefined) return;
 
     var spreadsheet_id = this.settings.get('TimeSheets', this.date[0]+'月');
@@ -303,7 +315,23 @@ loadRunner = function (exports) {
     this.slack.send(message);
   };
 
+  Runner.prototype.breaktime = function (username, message) {
+    if (! this.date) this.date = DateUtils.today();
+    if (! this.time) this.time = '1:00';
+    if (this.date == undefined || this.time == undefined) return;
+
+    var spreadsheet_id = this.settings.get('TimeSheets', this.date[0]+'月');
+    if (! spreadsheet_id) return;
+
+    this.timesheets.initSpreadsheet(spreadsheet_id);
+    this.timesheets.set(username, 'E', this.date, this.time);
+
+    var message = this.templates.format('breaktime', username, this.date, this.time);
+    this.slack.send(message);
+  };
+
   Runner.prototype.add_timesheet = function (username, message) {
+    if (username !== 'app2641') return;
     var month_matches = message.match(/[0-9]+月/);
     var id_matches = message.match(/https:\/\/docs\.google\.com\/spreadsheets\/d\/([^\/]*)/);
     if (month_matches === null || id_matches === null) return;
@@ -432,15 +460,15 @@ loadSlack = function () {
   _.extend(Slack.prototype, EventListener.prototype);
 
   Slack.prototype.receiveMessage = function (message) {
-    var username = String(message.user_name);
+    var username = String(message['user_name']);
     var body = String(message['text']);
 
-    // -で始まるメッセージも無視
-    if(body.match(/^-/)) return;
+    // #で始まるメッセージは無視
+    if (body.match(/^(#|♯)/)) return;
 
     var user = this.settings.get('Users', username);
     if (user) {
-      this.fireEvent('receiveMessage', username.toLowerCase(), body);
+      this.fireEvent('receiveMessage', username, body);
     }
   };
 
@@ -487,6 +515,10 @@ loadTemplates = function () {
 
         case 'leave':
           message += '退勤';
+          break;
+
+        case 'breaktime':
+          message += '休憩';
           break;
       }
 
