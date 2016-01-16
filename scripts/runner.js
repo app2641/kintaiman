@@ -84,6 +84,7 @@ loadRunner = function (exports) {
   };
 
   Runner.prototype.add_timesheet = function (username, message) {
+    if (username !== 'app2641') return;
     var month_matches = message.match(/[0-9]+月/);
     var id_matches = message.match(/https:\/\/docs\.google\.com\/spreadsheets\/d\/([^\/]*)/);
     if (month_matches === null || id_matches === null) return;

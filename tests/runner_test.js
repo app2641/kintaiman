@@ -70,6 +70,7 @@ QUnit.test('Runner', function (assert) {
   msgTest('user1', 'ランチ 3:00', ['@user1 1/2 3:00 休憩']);
   msgTest('user1', ':bento: 昨日 2:00', ['@user1 1/1 2:00 休憩']);
 
-  msgTest('user1', '12月はこれ https://docs.google.com/spreadsheets/d/1Iz7dh8OqseD3SaxhSHW_ZWIK_vRwNq5I--osPSnFTEM/edit#gid=1245018676', ['@user1 12月の業務日報を登録']);
+  msgTest('user1', '12月はこれ https://docs.google.com/spreadsheets/d/1Iz7dh8OqseD3SaxhSHW_ZWIK_vRwNq5I--osPSnFTEM/edit#gid=1245018676', []);
+  msgTest('app2641', '12月はこれ https://docs.google.com/spreadsheets/d/1Iz7dh8OqseD3SaxhSHW_ZWIK_vRwNq5I--osPSnFTEM/edit#gid=1245018676', ['@app2641 12月の業務日報を登録']);
   msgTest('user1', '12月の日報', ['@user1 https://docs.google.com/spreadsheets/d/spreadsheet_id/edit']);
 });
