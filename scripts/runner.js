@@ -21,8 +21,8 @@ loadRunner = function (exports) {
     this.time = DateUtils.parseTime(message);
 
     var commands = [
-      ['attendance', /(おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning)/],
-      ['leave', /(おつ|乙|お疲|お先|帰|退勤|さようなら|終わり|終わる|おわり|おわる|bye|グッバイ)/],
+      ['attendance', /(おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning|出社|モーニン|:sunny:)/],
+      ['leave', /(おつ|乙|お疲|お先|帰|退勤|さようなら|終わり|終わる|おわり|おわる|bye|失礼します|グッバイ|退社|:frog:|:beer:|:beers:)/],
       ['add_timesheet', /[0-9]+月はこれ/],
       ['get_timesheet', /[0-9]+月の日報/]
     ];
