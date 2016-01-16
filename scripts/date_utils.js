@@ -62,11 +62,6 @@ loadDateUtils = function () {
       min = (String(min).length == 1) ? '0' + min : min;
       return hour + ':' + min;
     }
-
-    var hour = now().getHours();
-    var min = now().getMinutes();
-    min = (String(min).length == 1) ? '0' + min : min;
-    return hour + ':' + min;
   };
 
   DateUtils.parseDate = function (str) {
@@ -96,10 +91,21 @@ loadDateUtils = function () {
 
       return [month, day];
     }
+  };
 
+  DateUtils.today = function (message) {
     var month = now().getMonth() + 1;
     var day = now().getDate();
+
     return [month, day];
+  };
+
+  DateUtils.nowtime = function (message) {
+    var hour = now().getHours();
+    var min = now().getMinutes();
+    min = (String(min).length == 1) ? '0' + min : min;
+
+    return hour + ':' + min;
   };
 
   return DateUtils;

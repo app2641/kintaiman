@@ -17,6 +17,9 @@ QUnit.test('Runner', function (assert) {
         case 'leave':
           note = '退勤';
           break;
+        case 'breaktime':
+          note = '休憩';
+          break;
       }
       return '@'+username+' '+date[0]+'/'+date[1]+' '+time+' '+note;
     }
@@ -62,6 +65,10 @@ QUnit.test('Runner', function (assert) {
   msgTest('user1', '帰ります 午後8時', ['@user1 1/2 20:00 退勤']);
   msgTest('user1', '昨日は１９：００に帰りました', ['@user1 1/1 19:00 退勤']);
   msgTest('user1', ':frog:', ['@user1 1/2 12:34 退勤']);
+
+  msgTest('user1', '休憩した', ['@user1 1/2 1:00 休憩']);
+  msgTest('user1', 'ランチ 3:00', ['@user1 1/2 3:00 休憩']);
+  msgTest('user1', ':bento: 昨日 2:00', ['@user1 1/1 2:00 休憩']);
 
   msgTest('user1', '12月はこれ https://docs.google.com/spreadsheets/d/1Iz7dh8OqseD3SaxhSHW_ZWIK_vRwNq5I--osPSnFTEM/edit#gid=1245018676', ['@user1 12月の業務日報を登録']);
   msgTest('user1', '12月の日報', ['@user1 https://docs.google.com/spreadsheets/d/spreadsheet_id/edit']);

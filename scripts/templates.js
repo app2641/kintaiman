@@ -16,6 +16,10 @@ loadTemplates = function () {
         case 'leave':
           message += '退勤';
           break;
+
+        case 'breaktime':
+          message += '休憩';
+          break;
       }
 
       return message;
