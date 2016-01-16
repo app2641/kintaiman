@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - '0.12'
+install: npm install
+script: make test
+notifications:
+  email:
+    - app2641@gmail.com
+  on_success: never
+  on_failure: always
