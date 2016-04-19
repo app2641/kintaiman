@@ -67,6 +67,7 @@ QUnit.test('Runner', function (assert) {
   msgTest('user1', '帰ります 午後8時', ['@user1 1/2 20:00 退勤']);
   msgTest('user1', '昨日は１９：００に帰りました', ['@user1 1/1 19:00 退勤']);
   msgTest('user1', ':frog:', ['@user1 1/2 12:34 退勤']);
+  msgTest('user1', 'get wild', ['@user1 1/2 12:34 退勤']);
 
   msgTest('user1', '休憩した', ['@user1 1/2 1:00 休憩']);
   msgTest('user1', 'ランチ 3:00', ['@user1 1/2 3:00 休憩']);
