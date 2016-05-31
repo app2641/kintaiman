@@ -1,5 +1,5 @@
 /* KintaiMan https://github.com/app2641/kintaiman */
-/* Version 0.2.2 */
+/* Version 0.2.3 */
 /* (c) app2641 2016- License: MIT */
 /* ------------------- */
 /**
@@ -268,11 +268,11 @@ loadRunner = function (exports) {
     this.time = DateUtils.parseTime(message);
 
     var commands = [
-      ['attendance', /(おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning|出社|モーニン|:sunny:)/i],
-      ['leave', /(おつ|乙|お疲|お先|帰|退勤|さようなら|終わり|終わる|おわり|おわる|bye|失礼します|グッバイ|退社|:frog:|:beer:|:beers:)|get\s*wild/i],
-      ['breaktime', /(昼食|ランチ|休憩|:bento:)/],
+      ['attendance', /おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning|出社|モーニン|:sunny:/i],
+      ['leave', /おつ|乙|お疲|お先|帰|退勤|さよ[う]?なら|終わり|終わる|おわり|おわる|bye|失礼します|グッバイ|退社|:frog:|:beer:|:beers:|get\s*wild/i],
+      ['breaktime', /昼食|ランチ|休憩|:bento:/],
       ['add_timesheet', /[0-9]+月はこれ/],
-      ['get_timesheet', /[0-9]+月の日報/]
+      ['get_timesheet', /[0-9０-９]+月の業務日報|[0-9０-９]+月の日報/]
     ];
 
     var command = _.find(commands, function (cmd) {
@@ -345,10 +345,12 @@ loadRunner = function (exports) {
   };
 
   Runner.prototype.get_timesheet = function (username, message) {
-    var month_matches = message.match(/[0-9]+月/);
+    var month_matches = message.match(/[0-9０-９]+月/);
     if (! month_matches) return;
 
-    var month = month_matches[0];
+    var month = month_matches[0].replace(/[０-９]/g, function (str) {
+      return String.fromCharCode(str.charCodeAt(0) - 0xFEE0);
+    });
     var ss_id = this.settings.get('TimeSheets', month);
 
     var message = '@'+username+' https://docs.google.com/spreadsheets/d/'+ss_id+'/edit';
