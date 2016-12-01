@@ -31,8 +31,8 @@ loadTimesheets = function () {
     var official_name = this.settings.get('Users', username);
     var sheet = this.ss.getSheetByName(official_name);
     if (! sheet) {
-      this.ss.getSheetByName('見本').copyTo(this.ss);
-      sheet = this.ss.getSheetByName('Copy of 見本');
+      this.ss.getSheetByName('見本ひな形').copyTo(this.ss);
+      sheet = this.ss.getSheetByName('Copy of 見本ひな形');
       sheet.setName(official_name);
     }
 
