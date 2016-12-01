@@ -1,5 +1,5 @@
 /* KintaiMan https://github.com/app2641/kintaiman */
-/* Version 0.2.4 */
+/* Version 0.2.5 */
 /* (c) app2641 2016- License: MIT */
 /* ------------------- */
 /**
@@ -578,8 +578,8 @@ loadTimesheets = function () {
     var official_name = this.settings.get('Users', username);
     var sheet = this.ss.getSheetByName(official_name);
     if (! sheet) {
-      this.ss.getSheetByName('見本').copyTo(this.ss);
-      sheet = this.ss.getSheetByName('Copy of 見本');
+      this.ss.getSheetByName('見本ひな形').copyTo(this.ss);
+      sheet = this.ss.getSheetByName('Copy of 見本ひな形');
       sheet.setName(official_name);
     }
 
