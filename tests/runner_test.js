@@ -59,6 +59,7 @@ QUnit.test('Runner', function (assert) {
   msgTest('user1', 'Hello', ['@user1 1/2 12:34 出勤']);
   msgTest('user1', '始めます 10/2 午後2時', ['@user1 10/2 14:00 出勤']);
   msgTest('user1', ':sunny:', ['@user1 1/2 12:34 出勤']);
+  msgTest('user1', ':oha:', ['@user1 1/2 12:34 出勤']);
 
   msgTest('user1', 'お疲れ様でした', ['@user1 1/2 12:34 退勤']);
   msgTest('user1', 'Bye', ['@user1 1/2 12:34 退勤']);
@@ -69,6 +70,8 @@ QUnit.test('Runner', function (assert) {
   msgTest('user1', ':frog:', ['@user1 1/2 12:34 退勤']);
   msgTest('user1', 'get wild', ['@user1 1/2 12:34 退勤']);
   msgTest('user1', 'さよなら', ['@user1 1/2 12:34 退勤']);
+  msgTest('user1', 'saraba', ['@user1 1/2 12:34 退勤']);
+  msgTest('user1', 'さらば', ['@user1 1/2 12:34 退勤']);
 
   msgTest('user1', '休憩した', ['@user1 1/2 1:00 休憩']);
   msgTest('user1', 'ランチ 3:00', ['@user1 1/2 3:00 休憩']);
