@@ -1,5 +1,5 @@
 /* KintaiMan https://github.com/app2641/kintaiman */
-/* Version 0.2.6 */
+/* Version 0.2.7 */
 /* (c) app2641 2016- License: MIT */
 /* ------------------- */
 /**
@@ -268,8 +268,8 @@ loadRunner = function (exports) {
     this.time = DateUtils.parseTime(message);
 
     var commands = [
-      ['attendance', /おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning|出社|モーニン|:sunny:/i],
-      ['leave', /おつ|乙|お疲|お先|帰|退勤|さよう?なら|終わり|終わる|おわり|おわる|bye|失礼します|グッバイ|退社|:frog:|:beer:|:beers:|get\s*wild/i],
+      ['attendance', /おは|おっは|出勤|始め|はじめ|ハロー|はろー|hello|morning|出社|モーニン|:sunny:|oha/i],
+      ['leave', /おつ|乙|お疲|お先|帰|退勤|さよう?なら|終わり|終わる|おわり|おわる|bye|失礼します|グッバイ|退社|:frog:|:beer:|:beers:|get\s*wild|さらば|saraba/i],
       ['breaktime', /昼食|ランチ|休憩|:bento:/],
       ['add_timesheet', /[0-9]+月はこれ/],
       ['get_timesheet', /[0-9０-９]+月の(?:業務)?日報/]
